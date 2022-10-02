@@ -1,3 +1,5 @@
+VOLUME = $(docker volume ls -q)
+
 all: build
 
 build:
@@ -16,7 +18,8 @@ clean:
 fclean:	clean
 	sudo rm -rf /home/pdeshaye/data/www/*
 	sudo rm -rf /home/pdeshaye/data/database/*
-	docker volume rm $(docker volume ls -q) || echo "Volumes were already clean."
+	docker volume rm -f inception_database
+	docker volume rm -f inception_www
 	docker system prune --force --all
 
 re : fclean all
