@@ -6,15 +6,20 @@ RUN apk update && apk upgrade && apk add \
 	openrc 
 
 
-RUN mkdir -p /etc/nginx/ssl
 RUN	mkdir -p /var/www/html/
-
-RUN 	openssl req -x509 -nodes -days 365 -newkey rsa:2048					\
-		-subj "/C=FR/ST=RHONE_ALPES/L=LYON/O=INCEPTION/CN=pdeshaye.42.fr"	\
-		-keyout etc/ssl/private/ssl-cert.key						        \
-		-out etc/ssl/certs/ssl-cert.crt
-
 COPY	src/nginx.conf /etc/nginx/http.d/default.conf
+
+RUN mkdir -p /etc/nginx/ssl
+
+RUN		openssl req \
+		-newkey rsa:4096 \
+		-x509 \
+		-sha256 \
+		-days 365 \
+		-nodes \
+		-subj "/C=FR/ST=RHONE_ALPES/L=LYON/O=INCEPTION/CN=pdeshaye.42.fr" \
+		-keyout /etc/nginx/ssl/inception.key \
+		-out /etc/nginx/ssl/inception.cert
 
 RUN rc-update add nginx default
 

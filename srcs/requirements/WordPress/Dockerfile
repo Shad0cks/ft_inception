@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.15
 
 RUN apk update && apk upgrade && apk add --no-cache php7\
 		php7-fpm \
@@ -31,17 +31,19 @@ RUN apk update && apk upgrade && apk add --no-cache php7\
 		wget\
 		openrc
 
+
+
 RUN rm -f /etc/php7/php-fpm.d/www.conf
 COPY	src/www.conf /etc/php7/php-fpm.d/www.conf
 
 RUN mkdir -p /var/www/html
 RUN	adduser -u 82 -D -S -G www-data www-data
 RUN chown -R 777 /var/www/html
-RUN chown -R www-data:www-data /var/www/wordpress
+RUN chown -R www-data:www-data /var/www/html
 
 COPY src/wp-config.php ./
-COPY	./conf/startWP.sh	./
+COPY	src/startWP.sh	./
 
 RUN chmod +x startWP.sh
-ENTRYPOINT [ "startWP.sh" ]
+ENTRYPOINT [ "sh", "startWP.sh" ]
 EXPOSE 9000
