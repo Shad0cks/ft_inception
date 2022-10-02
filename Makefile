@@ -1,5 +1,3 @@
-VOLUME = $(docker volume ls -q)
-
 all: build
 
 build:
@@ -11,10 +9,7 @@ logs:
 clean:
 	docker container stop mariadb wordpress nginx
 	docker-compose -f ./srcs/docker-compose.yml down
-	docker rmi -f mariadb
-	docker rmi -f wordpress
-	docker rmi -f nginx
-
+	docker container prune -f
 fclean:	clean
 	sudo rm -rf /home/pdeshaye/data/www/*
 	sudo rm -rf /home/pdeshaye/data/database/*
