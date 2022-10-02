@@ -14,8 +14,8 @@ clean:
 	docker rmi -f nginx
 
 fclean:	clean
-	sudo rm -rf /home/data/www/*
-	sudo rm -rf /home/data/database/*
+	sudo rm -rf /home/pdeshaye/data/www/*
+	sudo rm -rf /home/pdeshaye/data/database/*
 	docker volume rm $(docker volume ls -q) || echo "Volumes were already clean."
 	docker system prune --force --all
 

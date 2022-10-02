@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir -p /home/data/database
-mkdir -p /home/data/www
+mkdir -p /home/pdeshaye/data/database
+mkdir -p /home/pdeshaye/data/www
 
 /usr/bin/mysql_install_db --user=root --basedir=/usr --datadir=/var/lib/mysql
 /usr/bin/mysqld --user=root --datadir=/var/lib/mysql & sleep 2

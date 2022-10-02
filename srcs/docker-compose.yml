@@ -6,14 +6,14 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: "/home/data/database"
+      device: "/home/pdeshaye/data/database"
 
   www:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: "/home/data/www"
+      device: "/home/pdeshaye/data/www"
 
 services:
   mariadb:
