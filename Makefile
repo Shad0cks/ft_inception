@@ -10,6 +10,7 @@ clean:
 	docker container stop mariadb wordpress nginx
 	docker-compose -f ./srcs/docker-compose.yml down
 	docker container prune -f
+
 fclean:	clean
 	sudo rm -rf /home/pdeshaye/data/www/*
 	sudo rm -rf /home/pdeshaye/data/database/*
@@ -19,4 +20,4 @@ fclean:	clean
 
 re : fclean all
 
-.PHONY: all start stop status fclean clean re
+.PHONY: all build fclean clean re
